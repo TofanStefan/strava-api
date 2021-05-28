@@ -1,15 +1,15 @@
 import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
-import { Activities } from "./activities.entity";
+import { Activity } from "./activity.entity";
 import { TimeStampEntity } from "./timestamp.entity";
 @Entity()
 export class Athlete extends TimeStampEntity{
     @PrimaryColumn()
     id: number;
 
-    @OneToMany(type=> Activities, activity=> activity.athlete,{
+    @OneToMany(type=> Activity, activity=> activity.athlete,{
         cascade: true
     })
-    activities: Activities[]
+    activities: Activity[]
     
     @Column({nullable : true})
     username: string;

@@ -3,7 +3,7 @@ import { Athlete } from "./athlete.entity";
 import { TimeStampEntity } from "./timestamp.entity";
 
 @Entity()
-export class Activities extends TimeStampEntity{
+export class Activity extends TimeStampEntity{
     @PrimaryColumn()
     id: number
     
