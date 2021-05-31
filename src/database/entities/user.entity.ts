@@ -30,15 +30,4 @@ export class User  extends TimeStampEntity {
     belongs_assist_club: boolean;
 
    
-    // for updating access token
-    constructor(expires_at: number, expires_in: number, token_type: string,
-                refresh_token: string, access_token: string) {
-        super();
-        this.expires_at = expires_at;
-        this.expires_in = expires_in;
-        this.token_type = token_type;
-        this.refresh_token = refresh_token;
-        this.access_token = access_token;
-
-    }
 }
