@@ -6,6 +6,7 @@ export class Athlete extends TimeStampEntity{
     @PrimaryColumn()
     id: number;
 
+
     @OneToMany(type=> Activity, activity=> activity.athlete,{
         cascade: true
     })
