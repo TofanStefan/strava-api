@@ -28,6 +28,7 @@ export class User  extends TimeStampEntity {
 
     @Column({nullable:true})
     belongs_assist_club: boolean;
+}
 
    
 }

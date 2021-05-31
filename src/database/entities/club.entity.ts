@@ -1,9 +1,15 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
+import { ClubMember } from "./club-member.entity";
 
 @Entity()
 export class Club {
     @PrimaryColumn()
     id: number;
+
+    @OneToMany(type=> ClubMember, clubMember=> clubMember.club,{
+        cascade: true
+    })
+    members: ClubMember[]
 
     @Column()
     name: string;
