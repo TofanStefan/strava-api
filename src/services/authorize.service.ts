@@ -67,7 +67,6 @@ export class AuthorizeService {
             // if user exists update user 
             else {
                 //update athlete
-                this.refreshToken(user)
                 await this.athleteRepository.update({id : athleteInstance.id},athleteInstance)
                 //user.updated_at = new Date()
                 user.access_token = token_exchange.access_token
