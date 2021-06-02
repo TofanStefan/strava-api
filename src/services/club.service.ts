@@ -35,7 +35,7 @@ export class ClubService {
     }
 
 
-    // this was done in a migration
+    // this was done in a migration for assist club 
     async create(clubInstance: any) : Promise <Club> {
         try {
             const club = this.clubRepository.create({ clubInstance } as object)
@@ -44,6 +44,15 @@ export class ClubService {
             throw new InternalServerErrorException(error)
         }
         
+    }
+
+    async update(club_id: number, clubInstance: any) {
+        try {
+            const club = this.clubRepository.create({ ...clubInstance, ...{ updated_at: Date.now() } } as object);
+            return await this.clubRepository.update({ id: club_id }, club);
+        } catch (error) {
+            throw new InternalServerErrorException(error);
+        }
     }
 
 
