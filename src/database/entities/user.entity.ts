@@ -4,7 +4,7 @@ import { TimeStampEntity } from './timestamp.entity'
 @Entity()
 export class User  extends TimeStampEntity {
     @PrimaryGeneratedColumn("uuid")
-    id : number;
+    id : string;
 
     @Column()
     token_type: string;
@@ -28,7 +28,4 @@ export class User  extends TimeStampEntity {
 
     @Column({nullable:true})
     belongs_assist_club: boolean;
-}
-
-   
 }
