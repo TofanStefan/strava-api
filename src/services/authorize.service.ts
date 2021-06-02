@@ -3,12 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../database/entities/user.entity';
 import { Repository } from 'typeorm';
 import { Athlete } from 'src/database/entities/athlete.entity';
+import { UserService } from './users.service';
 const strava = require("strava-v3")
 
 @Injectable()
 export class AuthorizeService {
     constructor(@InjectRepository(User) private readonly userRepository: Repository<User>,
-                @InjectRepository(Athlete) private readonly athleteRepository: Repository<Athlete>) { }
+        @InjectRepository(Athlete) private readonly athleteRepository: Repository<Athlete>,
+        private readonly userService: UserService ) { }
   
     // creates and return an access request uri = > redirect to strava outh
     async requestAccess(): Promise<string> {
@@ -57,25 +59,14 @@ export class AuthorizeService {
             
             // if user doesn't exist create user 
             if (!user ) {
-                
-                user = this.userRepository.create({ ...token_exchange } as Object )
-                user.athlete = athleteInstance
-                user.belongs_assist_club = belongs_assist_club;
-
-                await this.userRepository.save(user);
+                await this.userService.create(token_exchange, athleteInstance, belongs_assist_club);
             }
             // if user exists update user 
             else {
                 //update athlete
                 await this.athleteRepository.update({id : athleteInstance.id},athleteInstance)
-                //user.updated_at = new Date()
-                user.access_token = token_exchange.access_token
-                user.refresh_token = token_exchange.refresh_token
-                user.expires_at = token_exchange.expires_at
-                user.expires_in = token_exchange.expires_in
-                user.belongs_assist_club = belongs_assist_club
                 // update user 
-                await this.userRepository.update({id : user.id}, user);
+                await this.userService.update(user,token_exchange,belongs_assist_club);
                 
 
             }
