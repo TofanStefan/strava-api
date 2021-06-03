@@ -9,6 +9,7 @@ import { AuthorizeModule } from './modules/authorize.module';
 import { UserModule } from './modules/users.module';
 import { AthleteModule } from './modules/athlete.module';
 import { ClubModule } from './modules/club.module';
+import { ActivityModule } from './modules/activity.module';
 
 
 @Module({
@@ -19,6 +20,7 @@ import { ClubModule } from './modules/club.module';
     UserModule,
     AthleteModule,
     ClubModule,
+    ActivityModule
 
   ],
   controllers: [AppController],

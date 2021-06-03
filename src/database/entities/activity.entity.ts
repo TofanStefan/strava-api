@@ -4,7 +4,7 @@ import { TimeStampEntity } from "./timestamp.entity";
 
 @Entity()
 export class Activity extends TimeStampEntity{
-    @PrimaryColumn()
+    @PrimaryColumn('double precision')
     id: number
     
     @ManyToOne(type => Athlete, athlete => athlete.id)
@@ -64,25 +64,25 @@ export class Activity extends TimeStampEntity{
     @Column({nullable:true})
     athlete_count: number
 
-    @Column()
+    @Column({nullable:true})
     photo_count: number
 
-    @Column()
+    @Column({nullable:true})
     trainer: boolean
 
-    @Column()
+    @Column({nullable:true})
     commute: boolean
 
-    @Column()
+    @Column({nullable:true})
     private: boolean
 
-    @Column()
+    @Column({nullable:true})
     flagged: boolean
 
     @Column({nullable : true})
     gear_id: number
 
-    @Column()
+    @Column({nullable:true})
     from_accepted_tag: boolean
 
     @Column("float8",{nullable : true})
@@ -103,10 +103,10 @@ export class Activity extends TimeStampEntity{
     @Column("float8",{nullable : true})
     kilojoules: number
 
-    @Column()
+    @Column({nullable:true})
     device_watts: boolean
 
-    @Column()
+    @Column({nullable:true})
     has_heartrate: boolean
 
     @Column("float8",{nullable : true})
@@ -124,10 +124,10 @@ export class Activity extends TimeStampEntity{
     @Column()
     total_photo_count: number
 
-    @Column()
+    @Column({nullable:true})
     has_kudoed: boolean
 
-    @Column()
+    @Column({nullable:true})
     suffer_score: number
 
 

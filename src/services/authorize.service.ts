@@ -79,19 +79,34 @@ export class AuthorizeService {
     }
 
     async refreshToken (user : User) : Promise<string>{
-    try{
-       
-        const refreshed =  await strava.oauth.refreshToken(user.refresh_token);
-      //  updates user with refresh , date and access token 
-        const auth = this.userRepository.create(refreshed);
-        const update = { ...auth, ...{ updated_at: new Date() } }
-        await this.userRepository.update({id:user.id},update)
+        try{
+        
+            const refreshed =  await strava.oauth.refreshToken(user.refresh_token);
+        //  updates user with refresh , date and access token 
+            const auth = this.userRepository.create(refreshed);
+            const update = { ...auth, ...{ updated_at: new Date() } }
+            await this.userRepository.update({id:user.id},update)
 
 
-        return refreshed.access_token;
+            return refreshed.access_token;
 
-    }catch(error){
-      throw new ForbiddenException(error)
+        }catch(error){
+        throw new ForbiddenException(error)
+        }
     }
-  } 
+    
+    async getAccess(user_id: string) {
+        try {
+
+            const user = await this.userService.findOne(user_id);
+            const currentDate = Math.round(Date.now() / 1000);
+            // if token is expired , generate new token
+            if (user.expires_at > currentDate)
+                return await this.refreshToken(user)
+            return user.access_token;
+            
+        } catch (error) {
+            throw new NotFoundException(error);
+        }
+    }
 }
