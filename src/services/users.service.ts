@@ -10,7 +10,7 @@ export class UserService {
     constructor(@InjectRepository(User) private readonly userRepository: Repository<User>,
                 @InjectRepository(Athlete) private readonly athleteRepository: Repository<Athlete>) { }
 
-    async findOne(user_id: string) : Promise <User|any> {
+    async findOne(user_id: string) : Promise <User> {
         try {
             const user = await this.userRepository.findOneOrFail({ id: user_id })
             return user;
@@ -20,7 +20,7 @@ export class UserService {
         
     }
 
-    async findAll() : Promise <User[]|any> {
+    async findAll() : Promise <User[]> {
         try {
             const users = await this.userRepository.find();
             return users;
@@ -30,7 +30,7 @@ export class UserService {
         
     }
 
-    async delete(user_id: string) : Promise <DeleteResult|any> {
+    async delete(user_id: string) : Promise <DeleteResult> {
         try {
             const user = await this.userRepository.delete({ id: user_id })
             return user;

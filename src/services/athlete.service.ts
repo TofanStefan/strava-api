@@ -29,7 +29,7 @@ export class AthleteService {
         return await this.athleteRepository.delete({id : athlete_id})
     }
 
-    async update(athlete: any): Promise<UpdateResult> {
+    async update(athlete: Athlete): Promise<UpdateResult> {
         try {
             return await this.athleteRepository.update({ id: athlete.id }, athlete);
         } catch (error)
@@ -40,7 +40,7 @@ export class AthleteService {
     }
 
    // not really useful , since athlete creation is made on cascade (on create user)
-    async create(athlete: object): Promise<Athlete> {
+    async create(athlete: Athlete): Promise<Athlete> {
         let athleteInstance = this.athleteRepository.create(athlete)
         return await this.athleteRepository.save(athleteInstance);
     }
