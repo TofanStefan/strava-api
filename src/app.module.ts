@@ -8,6 +8,7 @@ import config from 'ormconfig';
 import { AuthorizeModule } from './modules/authorize.module';
 import { UserModule } from './modules/users.module';
 import { AthleteModule } from './modules/athlete.module';
+import { ClubModule } from './modules/club.module';
 
 
 @Module({
@@ -15,7 +16,11 @@ import { AthleteModule } from './modules/athlete.module';
     ConfigModule.forRoot({isGlobal: true}),
     TypeOrmModule.forRoot(config),
     AuthorizeModule,
-    UserModule
+    UserModule,
+    AthleteModule,
+    ClubModule,
+
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

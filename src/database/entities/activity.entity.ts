@@ -131,7 +131,4 @@ export class Activity extends TimeStampEntity{
     suffer_score: number
 
 
-
-
-
 }
