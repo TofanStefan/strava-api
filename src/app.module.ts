@@ -15,9 +15,7 @@ import { AthleteModule } from './modules/athlete.module';
     ConfigModule.forRoot({isGlobal: true}),
     TypeOrmModule.forRoot(config),
     AuthorizeModule,
-    UserModule,
-    AthleteModule
-  ],
+    UserModule
   controllers: [AppController],
   providers: [AppService],
 })
