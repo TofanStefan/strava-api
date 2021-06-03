@@ -6,16 +6,17 @@ import {  } from './app.controller';
 import { AppService } from './app.service';
 import config from 'ormconfig';
 import { AuthorizeModule } from './modules/authorize.module';
-import { AuthorizeController } from './controllers/authorize.controller';
-import { UserController } from './controllers/users.controller';
+import { ClubModule } from './modules/club.module';
 import { UserModule } from './modules/users.module';
+
 
 @Module({
   imports: [
     ConfigModule.forRoot({isGlobal: true}),
     TypeOrmModule.forRoot(config),
     AuthorizeModule,
-    UserModule
+    UserModule,
+    ClubModule
   ],
   controllers: [AppController],
   providers: [AppService],
