@@ -19,10 +19,4 @@ export class CreateActivityDto{
     trainer?: number;
 
     commute?: number;
-
-
-
-
-
-
 }
