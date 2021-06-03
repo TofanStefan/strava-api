@@ -2,9 +2,9 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne, JoinColumn
 import { Athlete } from './athlete.entity';
 import { TimeStampEntity } from './timestamp.entity'
 @Entity()
-export class User  extends TimeStampEntity {
+export class User extends TimeStampEntity {
     @PrimaryGeneratedColumn("uuid")
-    id : string;
+    id: string;
 
     @Column()
     token_type: string;
@@ -21,15 +21,11 @@ export class User  extends TimeStampEntity {
     @Column()
     expires_in: number;
 
-    @OneToOne(() => Athlete,{cascade:true})
+    @OneToOne(() => Athlete, { cascade: true })
     @JoinColumn()
-    athlete : Athlete
+    athlete: Athlete
 
 
-    @Column({nullable:true})
+    @Column({ nullable: true })
     belongs_assist_club: boolean;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 3d55772557eaa2e8024128391056a574972cb4cf

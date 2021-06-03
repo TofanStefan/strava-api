@@ -4,13 +4,16 @@ import { User } from '../database/entities/user.entity';
 import { Repository } from 'typeorm';
 import { Athlete } from 'src/database/entities/athlete.entity';
 import { UserService } from './users.service';
+import { AthleteService } from './athlete.service';
 const strava = require("strava-v3")
 
 @Injectable()
 export class AuthorizeService {
     constructor(@InjectRepository(User) private readonly userRepository: Repository<User>,
         @InjectRepository(Athlete) private readonly athleteRepository: Repository<Athlete>,
-        private readonly userService: UserService ) { }
+        private readonly userService: UserService,
+        private readonly athleteService: AthleteService,
+        ) { }
   
     // creates and return an access request uri = > redirect to strava outh
     async requestAccess(): Promise<string> {
@@ -64,7 +67,7 @@ export class AuthorizeService {
             // if user exists update user 
             else {
                 //update athlete
-                await this.athleteRepository.update({id : athleteInstance.id},athleteInstance)
+                await this.athleteService.update(athleteInstance);
                 // update user 
                 await this.userService.update(user,token_exchange,belongs_assist_club);
                 

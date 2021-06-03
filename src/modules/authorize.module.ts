@@ -6,6 +6,7 @@ import { User } from '../database/entities/user.entity';
 import { ConfigModule } from '@nestjs/config';
 import { Athlete } from 'src/database/entities/athlete.entity';
 import { UserService } from 'src/services/users.service';
+import { AthleteService } from 'src/services/athlete.service';
 
 @Module({
   imports : [
@@ -13,7 +14,7 @@ import { UserService } from 'src/services/users.service';
     TypeOrmModule.forFeature([User,Athlete])
   ],
   controllers: [AuthorizeController],
-  providers: [AuthorizeService,UserService],
+  providers: [AuthorizeService,UserService,AthleteService],
   exports:[AuthorizeService]
   
 })
