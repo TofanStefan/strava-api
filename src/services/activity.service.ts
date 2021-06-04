@@ -40,10 +40,17 @@ export class ActivityService {
     }
 
     // creates new activity for athlete_id
-    async create(user_id: string,createActivityDto : CreateActivityDto): Promise<any> {
+    async create(user_id: string,createActivityDto : CreateActivityDto): Promise<Activity> {
         try {
-       
-            //this.authService.getAccess(user_id)
+            const token = {
+                access_token : await this.authService.getAccess(user_id)
+            }
+            const data = { ...token, ...createActivityDto };
+
+            const activity = await strava.activities.create(data)
+
+            this.activityRepository.save(activity);
+            return activity;
             
         } catch (error) {
             throw new NotFoundException(error)

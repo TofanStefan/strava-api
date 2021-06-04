@@ -29,14 +29,14 @@ export class ClubService {
         }
     }
 
-    async delete(club_id: number): Promise<DeleteResult | any>{
+    async delete(club_id: number): Promise<DeleteResult>{
         return await this.clubRepository.delete({ id: club_id });
 
     }
 
 
     // this was done in a migration for assist club 
-    async create(clubInstance: any) : Promise <Club> {
+    async create(clubInstance: Club) : Promise <Club> {
         try {
             const club = this.clubRepository.create({ clubInstance } as object)
             return await this.clubRepository.save(club);
@@ -46,7 +46,7 @@ export class ClubService {
         
     }
 
-    async update(club_id: number, clubInstance: any) {
+    async update(club_id: number, clubInstance: Club) {
         try {
             const club = this.clubRepository.create({ ...clubInstance, ...{ updated_at: Date.now() } } as object);
             return await this.clubRepository.update({ id: club_id }, club);

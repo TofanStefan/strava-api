@@ -6,6 +6,7 @@ import { ActivityService } from 'src/services/activity.service';
 import { Athlete } from 'src/database/entities/athlete.entity';
 import { Activity } from 'src/database/entities/activity.entity';
 import { DeleteResult } from 'typeorm';
+import { CreateActivityDto } from 'src/dto/createActivity.dto';
 @ApiTags('activities')
 @Controller('activities')
 export class ActivityController {
@@ -19,9 +20,14 @@ export class ActivityController {
   @Get(':activity_id')
   async findOne(@Param('activity_id',ParseIntPipe) activity_id : number) : Promise<Activity> {
         return await this.activityService.findOne(activity_id)
-  }
-  
+      }
+   
   @Put(':user_id')
+  async create(@Param('user_id') user_id: string, @Body() createActivity: CreateActivityDto) {
+        return await this.activityService.create(user_id, createActivity);
+  }      
+  
+  @Patch(':user_id')
   async sync(@Param('user_id') user_id: string): Promise<Activity[]>{
         return await this.activityService.syncActivities(user_id);
 
