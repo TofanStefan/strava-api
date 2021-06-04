@@ -9,7 +9,7 @@ import { UserController } from 'src/controllers/users.controller';
 
 @Module({
   imports : [
-    TypeOrmModule.forFeature([User,Athlete])
+    TypeOrmModule.forFeature([User])
   ],
   controllers: [UserController],
   providers: [UserService],

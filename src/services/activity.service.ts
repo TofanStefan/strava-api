@@ -12,7 +12,7 @@ const strava = require("strava-v3")
 export class ActivityService {
     constructor(@InjectRepository(Activity) private readonly activityRepository: Repository<Activity>,
         private readonly authService: AuthorizeService,
-        private readonly userService: UserService
+
     ) { }
     
     async findAll() : Promise<Activity[]> {
