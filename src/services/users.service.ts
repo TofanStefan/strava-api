@@ -7,8 +7,7 @@ const strava = require("strava-v3")
 
 @Injectable()
 export class UserService {
-    constructor(@InjectRepository(User) private readonly userRepository: Repository<User>,
-                @InjectRepository(Athlete) private readonly athleteRepository: Repository<Athlete>) { }
+    constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) { }
 
     async findOne(user_id: string) : Promise <User> {
         try {

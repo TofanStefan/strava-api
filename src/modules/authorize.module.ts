@@ -5,16 +5,18 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../database/entities/user.entity';
 import { ConfigModule } from '@nestjs/config';
 import { Athlete } from 'src/database/entities/athlete.entity';
-import { UserService } from 'src/services/users.service';
-import { AthleteService } from 'src/services/athlete.service';
+import { UserModule } from './users.module';
+import { AthleteModule } from './athlete.module';
 
 @Module({
   imports : [
     ConfigModule.forRoot({isGlobal: true}),
-    TypeOrmModule.forFeature([User,Athlete])
+    TypeOrmModule.forFeature([User, Athlete]),
+    UserModule,
+    AthleteModule
   ],
   controllers: [AuthorizeController],
-  providers: [AuthorizeService,UserService,AthleteService],
+  providers: [AuthorizeService],
   exports:[AuthorizeService]
   
 })
