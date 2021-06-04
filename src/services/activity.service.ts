@@ -12,7 +12,6 @@ const strava = require("strava-v3")
 export class ActivityService {
     constructor(@InjectRepository(Activity) private readonly activityRepository: Repository<Activity>,
         private readonly authService: AuthorizeService,
-
     ) { }
     
     async findAll() : Promise<Activity[]> {
@@ -61,7 +60,7 @@ export class ActivityService {
     async syncActivities(user_id: string): Promise<Activity[]>{
 
         try {
-
+            let promises = new Array();
             const access_token = await this.authService.getAccess(user_id)
             const activities = await strava.athlete.listActivities({ access_token })
 
@@ -69,9 +68,10 @@ export class ActivityService {
                 let activityInstance = new Activity();
                 // activity instance 
                 activityInstance = this.activityRepository.create(element as object);
-                await this.activityRepository.save(activityInstance);
+                promises.push(this.activityRepository.save(activityInstance));
                 
             });
+            await Promise.all(promises);
 
             return activities;
 
