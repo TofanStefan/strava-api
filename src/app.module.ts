@@ -10,6 +10,7 @@ import { UserModule } from './modules/users.module';
 import { AthleteModule } from './modules/athlete.module';
 import { ClubModule } from './modules/club.module';
 import { ActivityModule } from './modules/activity.module';
+import { ClubMemberModule } from './modules/club-member.module';
 
 
 @Module({
@@ -20,7 +21,8 @@ import { ActivityModule } from './modules/activity.module';
     UserModule,
     AthleteModule,
     ClubModule,
-    ActivityModule
+    ActivityModule,
+    ClubMemberModule
 
   ],
   controllers: [AppController],

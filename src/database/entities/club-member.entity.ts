@@ -1,11 +1,11 @@
-import { Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { Club } from "./club.entity";
 import { TimeStampEntity } from "./timestamp.entity";
 
 @Entity()
 export class ClubMember extends TimeStampEntity{
-    @PrimaryColumn('uuid')
-    id: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
     @ManyToOne(type => Club, club => club.id)
     club: Club
