@@ -9,6 +9,9 @@ export class ClubActivity extends TimeStampEntity{
     })
     id: string;
 
+    @ManyToOne(type => Club, club => club.id)
+    club: Club
+
     @Column()
     name: string
 
