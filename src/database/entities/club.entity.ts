@@ -1,4 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
+import { ClubActivity } from "./club-activity.entity";
 import { ClubMember } from "./club-member.entity";
 
 @Entity()
