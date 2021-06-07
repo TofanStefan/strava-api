@@ -2,11 +2,15 @@ import { ForbiddenException, Injectable, InternalServerErrorException, NotFoundE
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { ClubMember } from 'src/database/entities/club-member.entity';
+import { AuthorizeService } from './authorize.service';
+import { Club } from 'src/database/entities/club.entity';
 const strava = require("strava-v3")
 
 @Injectable()
 export class ClubMemberService {
-    constructor(@InjectRepository(ClubMember) private readonly clubMemberRepository: Repository<ClubMember>) { }
+    constructor(@InjectRepository(ClubMember) private readonly clubMemberRepository: Repository<ClubMember>,
+                private readonly authorizeService: AuthorizeService
+    ) { }
 
     // gets all members for a club
     async findAll(club_id:number) : Promise<ClubMember[]> {
@@ -65,6 +69,66 @@ export class ClubMemberService {
             throw new InternalServerErrorException(error) 
         }
     }
+
+
+    async syncAll(club: Club): Promise<void> {
+        try {
+            // get club member count for pagination
+            const access_token = await this.authorizeService.getAccess(process.env.ASSIST_USER_UUID);
+            const member_count = club.member_count;
+
+            // calculate max page
+            let promises = [], page_number = 1, per_page = 30;
+            let max_page = Math.ceil(member_count / per_page);
+            
+            // get all the club members
+            while (page_number <= max_page) {
+                const promise = strava.clubs.listMembers(
+                    {
+                        id: club.id,
+                        per_page: 30,
+                        page: page_number,
+                        access_token
+                    })
+                promises.push(promise);
+                page_number++;
+
+            }
+            // await all promises
+            const solved = await Promise.all(promises);
+            var members = [].concat.apply([], solved)
+
+
+            
+            let insertPromises = [];
+
+            members.forEach(member => {
+                let memberInstance = this.clubMemberRepository.create(member as object)
+                memberInstance.club = club;
+                insertPromises.push(this.clubMemberRepository.save(memberInstance))
+            });
+            //await insertion
+            await Promise.all(insertPromises);
+        } catch (error) {
+            throw new InternalServerErrorException(error);
+        }
+
+    
+    }
+
+    //deletes all memberof a club
+    async deleteAll(club: Club): Promise<DeleteResult> {
+        
+        try {
+
+            return await this.clubMemberRepository.delete({club});
+            
+        } catch (error) {
+            throw new InternalServerErrorException(error)
+        }
+            
+    }
+
 
  
 
