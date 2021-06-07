@@ -11,10 +11,13 @@ import { AthleteModule } from './modules/athlete.module';
 import { ClubModule } from './modules/club.module';
 import { ActivityModule } from './modules/activity.module';
 import { ClubMemberModule } from './modules/club-member.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { TasksService } from './task-scheduling/tasks.service';
 
 
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     ConfigModule.forRoot({isGlobal: true}),
     TypeOrmModule.forRoot(config),
     AuthorizeModule,
@@ -26,6 +29,6 @@ import { ClubMemberModule } from './modules/club-member.module';
 
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,TasksService]
 })
 export class AppModule {}
