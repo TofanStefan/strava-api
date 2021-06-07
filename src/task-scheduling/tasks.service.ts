@@ -15,8 +15,13 @@ export class TasksService {
 
           console.log("Syncing club members....")
 
+          // gets assist club 
           const club = await this.clubService.findOne(Number(process.env.STRAVA_ASSIST_CLUB_ID))
+
+          // deletes all member (cannot update because member is not linked to athlete)
           await this.clubMemberService.deleteAll(club);
+
+          // sync all strava clu members with bd 
           await this.clubMemberService.syncAll(club);
 
           console.log("Sync completed successfuly....")

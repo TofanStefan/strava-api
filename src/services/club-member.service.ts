@@ -105,7 +105,7 @@ export class ClubMemberService {
             members.forEach(member => {
                 let memberInstance = this.clubMemberRepository.create(member as object)
                 memberInstance.club = club;
-                insertPromises.push(this.clubMemberRepository.insert(memberInstance))
+                insertPromises.push(this.clubMemberRepository.save(memberInstance))
             });
             //await insertion
             await Promise.all(insertPromises);
