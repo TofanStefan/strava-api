@@ -12,11 +12,6 @@ export class Club {
     })
     members: ClubMember[]
 
-     @OneToMany(type=> ClubActivity, clubActivity=> clubActivity.club,{
-        cascade: true
-    })
-    activities: ClubActivity[]
-
     @Column()
     name: string;
 
