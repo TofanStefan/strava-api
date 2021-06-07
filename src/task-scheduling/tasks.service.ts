@@ -13,7 +13,7 @@ export class TasksService {
   async synchronizeClubMembers() {
       try {
 
-          console.log("Syncing club members....")
+          this.logger.debug('Syncing club members....');
 
           // gets assist club 
           const club = await this.clubService.findOne(Number(process.env.STRAVA_ASSIST_CLUB_ID))
@@ -24,7 +24,7 @@ export class TasksService {
           // sync all strava clu members with bd 
           await this.clubMemberService.syncAll(club);
 
-          console.log("Sync completed successfuly....")
+          this.logger.debug('Sync completed successfuly....');
 
 
           
