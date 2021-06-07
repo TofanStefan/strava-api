@@ -64,7 +64,7 @@ export class ActivityService {
             const access_token = await this.authService.getAccess(user_id)
             const activities = await strava.athlete.listActivities({ access_token })
 
-            activities.forEach(async element=>  {
+            activities.forEach( element=>  {
                 let activityInstance = new Activity();
                 // activity instance 
                 activityInstance = this.activityRepository.create(element as object);
