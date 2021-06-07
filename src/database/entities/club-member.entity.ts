@@ -4,7 +4,9 @@ import { TimeStampEntity } from "./timestamp.entity";
 
 @Entity()
 export class ClubMember extends TimeStampEntity{
-    @PrimaryGeneratedColumn('uuid')
+   @PrimaryGeneratedColumn('uuid', {
+    name: 'id',
+    })
     id: string;
 
     @ManyToOne(type => Club, club => club.id)
