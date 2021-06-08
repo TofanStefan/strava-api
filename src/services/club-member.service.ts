@@ -100,15 +100,16 @@ export class ClubMemberService {
 
 
             
-            let insertPromises = [];
+            let createBulk =[];
+
 
             members.forEach(member => {
                 let memberInstance = this.clubMemberRepository.create(member as object)
                 memberInstance.club = club;
-                insertPromises.push(this.clubMemberRepository.save(memberInstance))
+                createBulk.push(memberInstance)
             });
             //await insertion
-            await Promise.all(insertPromises);
+            await this.clubMemberRepository.save(createBulk);
         } catch (error) {
             throw new InternalServerErrorException(error);
         }

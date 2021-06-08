@@ -27,7 +27,7 @@ export class ClubActivity extends TimeStampEntity{
     @Column()
     elapsed_time: number
 
-    @Column()
+    @Column({nullable:true})
     total_elevation_gain: number
 
     @Column({nullable:true})
