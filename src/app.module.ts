@@ -13,6 +13,7 @@ import { ActivityModule } from './modules/activity.module';
 import { ClubMemberModule } from './modules/club-member.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TasksService } from './task-scheduling/tasks.service';
+import { ClubActivityModule } from './modules/club-activity.module';
 
 
 @Module({
@@ -25,7 +26,8 @@ import { TasksService } from './task-scheduling/tasks.service';
     AthleteModule,
     ClubModule,
     ActivityModule,
-    ClubMemberModule
+    ClubMemberModule,
+    ClubActivityModule
 
   ],
   controllers: [AppController],
