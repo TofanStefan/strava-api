@@ -8,10 +8,8 @@ import { ClubMemberModule } from './club-member.module';
   imports : [
     ConfigModule.forRoot({isGlobal: true}),
     ClubModule,
-    ClubMemberModule
-
-    
-    
+    ClubMemberModule,
+    TaskModule
   ],
   providers: [TasksService],
   
