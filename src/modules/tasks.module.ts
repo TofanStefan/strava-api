@@ -3,18 +3,15 @@ import { ConfigModule } from '@nestjs/config';
 import { ClubModule } from './club.module';
 import { TasksService } from 'src/task-scheduling/tasks.service';
 import { ClubMemberModule } from './club-member.module';
-import { ClubActivityService } from 'src/services/club-activities.service';
 
 @Module({
   imports : [
     ConfigModule.forRoot({isGlobal: true}),
     ClubModule,
     ClubMemberModule,
-
-    
-    
+    TaskModule
   ],
-  providers: [TasksService,ClubActivityService],
+  providers: [TasksService],
   
 })
 export class TaskModule {}

@@ -92,10 +92,13 @@ export class ClubActivityService {
                         page: page_number,
                         access_token
                     })
-                pages.push(page);
+                
                 page_number++;
+                
                 if (page.length === 0)
                     break;
+                
+                pages.push(page);
 
             }
 
