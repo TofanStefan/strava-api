@@ -21,7 +21,7 @@ export class ClubService {
     
     async findOne(club_id: number): Promise<Club> {
         try {
-            const club = await this.clubRepository.findOneOrFail()
+            const club = await this.clubRepository.findOneOrFail({id:club_id})
             return club;
         }
         catch (error) {

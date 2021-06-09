@@ -9,7 +9,7 @@ export class TasksService {
                 private readonly clubMemberService : ClubMemberService) { }
   private readonly logger = new Logger(TasksService.name);
 
-  @Cron(CronExpression.EVERY_2_HOURS)
+  @Cron(CronExpression.EVERY_10_SECONDS)
   async synchronizeClubMembers() {
       try {
 

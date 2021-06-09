@@ -101,7 +101,7 @@ export class AuthorizeService {
             const user = await this.userService.findOne(user_id);
             const currentDate = Math.round(Date.now() / 1000);
             // if token is expired , generate new token
-            if (user.expires_at > currentDate)
+            if (user.expires_at < currentDate)
                 return await this.refreshToken(user)
             return user.access_token;
             
